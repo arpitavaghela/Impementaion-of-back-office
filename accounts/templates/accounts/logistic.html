@@ -1,0 +1,225 @@
+
+{% load static %}
+{% block content %}
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRM</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<link href="{% static '/css/main.css'  %}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+	
+<style>
+  .hello-msg{
+    font-size: 18px;
+    color: #fff;
+    margin-right: 20px;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ <img src="{% static 'images/log12.png' %}">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      {% if request.user.is_staff %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Dashboard</a>
+      </li>
+     
+      {% endif %}
+	  <li class="nav-item">
+        <a class="nav-link" href="http://127.0.0.1:8000/admin">Admin</a>
+      </li>
+    </ul>
+  </div>
+
+  <span class="hello-msg">Hello , <font color="lawngreen">[{{request.user}}]</font></span>
+  <span ><a class="hello-msg" href="{% url 'logout' %}">-> Logout</a></span>
+
+</nav>
+
+
+	{% include 'accounts/status_row.html' %}
+
+	<div class="container-fluid">
+
+	 
+
+	</div>
+
+
+</body>
+
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+
+<br>
+
+
+<div class="row">
+
+
+
+
+
+
+	<div class="col-md-4">
+		
+		<hr>
+		
+			<div class="card text-white  mb-3" id="total-orders" style="background-color:#7CD1C0">
+			  	<div class="card-header">
+			  		<h5 class="card-title text-center">Pending</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Date Orderd</th>
+					<th>Status</th>
+					<th>Update</th>
+				
+				</tr>
+				{% for order in ordersp %}
+					<tr>
+						<td>{{order.product}}</td>
+						<td>{{order.date_created}}</td>
+						<td>{{order.status}}</td>
+						<td><a class="btn btn-sm btn-warning" href="{% url 'update_order' order.id %}">Update</a></td>
+
+					</tr>
+				{% endfor %}
+			</table>
+				</div>
+			</div>
+		
+		
+		<hr>
+		
+	</div>
+	
+	
+	
+		<div class="col-md-4">
+		
+		<hr>
+		
+			<div class="card text-white  mb-3" id="total-orders" style="background-color:orange">
+			  	<div class="card-header">
+			  		<h5 class="card-title text-center">Out For Delivery</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Date Orderd</th>
+					<th>Status</th>
+					<th>Update</th>
+				
+				</tr>
+				{% for order in ordersofd %}
+					<tr>
+						<td>{{order.product}}</td>
+						<td>{{order.date_created}}</td>
+						<td>{{order.status}}</td>
+						<td><a class="btn btn-sm btn-warning" href="{% url 'update_order' order.id %}">Update</a></td>
+
+					</tr>
+				{% endfor %}
+			</table>
+				</div>
+			</div>
+		
+		
+		<hr>
+		
+	</div>
+	
+	
+	
+	<div class="col-md-4">
+		
+		<hr>
+		
+			<div class="card text-white  mb-3" id="total-orders" style="background-color:#1DBF13">
+			  	<div class="card-header">
+			  		<h5 class="card-title text-center">Delivered</h5>
+			  	</div>
+			  	<div class="card-body">
+			    	<table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Date Orderd</th>
+					<th>Status</th>
+				
+				
+				</tr>
+				{% for order in ordersd %}
+					<tr>
+						<td>{{order.product}}</td>
+						<td>{{order.date_created}}</td>
+						<td>{{order.status}}</td>
+						
+					</tr>
+				{% endfor %}
+			</table>
+				</div>
+			</div>
+		
+		
+		<hr>
+		
+	</div>
+		
+	
+	<!-- 	<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Date Orderd</th>
+					<th>Status</th>
+					<th>Update</th>
+				
+				</tr>
+				{% for order in ordersd %}
+					<tr>
+						<td>{{order.product}}</td>
+						<td>{{order.date_created}}</td>
+						<td>{{order.status}}</td>
+						<td><a class="btn btn-sm btn-warning" href="{% url 'update_order' order.id %}">Update</a></td>
+
+					</tr>
+				{% endfor %}
+			</table>
+		</div> -->
+	
+
+</div>
+
+
+</div>
+
+
+
+
+
+{% endblock content %}

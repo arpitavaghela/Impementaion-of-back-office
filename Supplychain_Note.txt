@@ -1,0 +1,21 @@
+	[3 Role]
+	
+	UserName - Password
+[1] Desginer - India@2020
+[2] Company - India@2020
+[3] Logistic - India@2020
+
+
+For Run First Migrate All Settings - python manage.py migrate
+Then Run this 					   - python manage.py runserver
+
+
+[1] Designer - Can View,Add,Remove Product
+[2] Company - Can View,Add,Remove Order
+[3] Logistic - Can View,Add,Remove Order Status
+
+
+python manage.py runserver
+
+python manage.py runserver
+

@@ -1,0 +1,211 @@
+
+{% load static %}
+{% block content %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRM</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<link href="{% static '/css/main.css'  %}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+	{% include 'accounts/navbar_company.html' %}
+
+	<div class="container-fluid">
+
+	 
+
+	</div>
+
+
+
+</body>
+
+</html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body" style="background-color:#7CD1C0">
+				<h3>Pending</h3>
+			<hr>
+				<table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Date Orderd</th>
+					<th>Status</th>
+				
+					<th>Remove</th>
+				</tr>
+  
+
+				{% for order in ordersp %}
+					<tr>
+					
+						<td>{{order.product}}</td>
+						<td>{{order.date_created}}</td>
+						<td>{{order.status}}</td>
+						<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Cancel</a></td>
+					</tr>
+				{% endfor %}
+				
+			</table>
+		</div>
+	</div>
+
+
+
+	<div class="col-md-6">
+		<div class="card card-body" style="background-color:skyblue">
+				<h3>Create Order</h3>
+			<hr>
+			<form action="" method="POST">
+            	{% csrf_token %}
+					Customer
+					<select name="customer" class="form-control" required id="id_customer">
+  <option value="" selected>---------</option>
+
+  <option value="2">Ahmedabad</option>
+
+  <option value="3">Ratlam</option>
+
+  <option value="4">Indore</option>
+
+  <option value="5">Mumbai</option>
+
+  <option value="6">Bangalore</option>
+
+</select>
+				
+				
+					Product
+					<select name="product" class="form-control" required id="id_product">
+  <option value="" selected>---------</option>
+
+  <option value="1">Calvin Klein - Men Black Round Neck T-shirt</option>
+
+  <option value="2">H&amp;M - Men Blue  T-Shirt</option>
+
+  <option value="3">Nike - Men White Standard Fit T-shirt</option>
+
+  <option value="4">HRX - Men YellowRound Neck T-Shirt</option>
+
+  <option value="5">Roadster - Men Navy Round Neck T-shirt</option>
+
+</select>
+				
+				
+				
+					
+ <input type="hidden" id="id_status" name="status" value="Pending"  class="form-control">
+
+				
+				
+				<hr>
+				<input type="submit" class="btn btn-info">
+			</form>	
+			
+			
+			<!-- 
+			<form action="" method="POST">
+            	{% csrf_token %}
+				{% for field in form %}
+					{{field.label}}
+					{{field|add_class:'form-control'}}
+				
+				{% endfor %}
+				<hr>
+				<input type="submit" class="btn btn-info">
+			</form> -->			
+			
+			
+			
+			
+		</div>
+		</div>
+</div>
+
+
+<hr>
+
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body" style="background-color:orange">
+				<h3>Out For Delivery</h3>
+			<hr>
+				<table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Date Orderd</th>
+					<th>Status</th>
+				
+				</tr>
+  
+
+				{% for order in ordersofd %}
+					<tr>
+					
+						<td>{{order.product}}</td>
+						<td>{{order.date_created}}</td>
+						<td>{{order.status}}</td>
+					</tr>
+				{% endfor %}
+				
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="card card-body"  style="background-color:#1DBF13">
+				<h3>Delivered</h3>
+			<hr>
+				<table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Date Orderd</th>
+					<th>Status</th>
+				
+				</tr>
+  
+
+				{% for order in ordersd %}
+					<tr>
+					
+						<td>{{order.product}}</td>
+						<td>{{order.date_created}}</td>
+						<td>{{order.status}}</td>
+					</tr>
+				{% endfor %}
+				
+			</table>
+		</div>
+	</div>
+
+
+	
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}
